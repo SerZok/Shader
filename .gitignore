@@ -53,3 +53,9 @@
 *.db-shm
 *.db-wal
 /.vs/Shader/v17/Browse.VC.db
+/x64/Debug/Shader.tlog/CL.command.1.tlog
+/x64/Debug/Shader.tlog/CL.read.1.tlog
+/x64/Debug/Shader.tlog/link.read.1.tlog
+/x64/Debug/main.obj
+/x64/Debug/Shader.tlog/CL.write.1.tlog
+/SHADER/Example.fsh
