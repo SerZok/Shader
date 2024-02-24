@@ -11,6 +11,7 @@ bool Shader::load(std::string veftexShaderFilename, std::string fragmentShaderFi
 void Shader::activate() {
 	glUseProgram(program);
 }
+
 // отключение шейдера
 void Shader::deactivate() {
 	glUseProgram(0);

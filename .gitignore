@@ -49,3 +49,7 @@
 /.vs/Graphic/v17/Browse.VC.db-shm
 /.vs/Graphic/v17/Browse.VC.db
 /x64/Debug/Shader.obj
+*.opendb
+*.db-shm
+*.db-wal
+/.vs/Shader/v17/Browse.VC.db
