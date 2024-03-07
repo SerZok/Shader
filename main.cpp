@@ -24,8 +24,7 @@ void drawObject();
 
 // функция вызывается при перерисовке окна
 // в том числе и принудительно, по команде glutPostRedisplay
-void display()
-{
+void display(){
 	// отчищаем буфер кадра
 	glClearColor(1.0, 1.0, 1.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -118,9 +117,11 @@ void drawObject()
 			-0.5,	+0.5,
 			-0.5,	-0.5,
 			+0.5,	+0.5,
+
 			+0.5,	+0.5,
 			-0.5,	-0.5,
 			+0.5,	-0.5
+
 		};
 		glBufferData(GL_ARRAY_BUFFER, sizeof(Verteces), Verteces, GL_STATIC_DRAW);
 
