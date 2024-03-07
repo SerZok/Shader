@@ -34,7 +34,7 @@ void main(int argc, char** argv){
 	glutInitContextVersion(3, 3);
 	glutInitContextProfile(GLUT_CORE_PROFILE);
 	// устанавливаем верхний левый угол окна
-	glutInitWindowPosition(300, 100);
+	glutInitWindowPosition(200, 10);
 	// устанавливаем размер окна
 	glutInitWindowSize(800, 600);
 	// создание окна

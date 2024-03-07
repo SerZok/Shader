@@ -31,6 +31,7 @@ extern vec2 speed;
 extern vec4 color1;
 // второй цвет (для градиентной заливки)
 extern vec4 color2;
+extern vec4 color3;
 
 void initData();
 void drawObject();

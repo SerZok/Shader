@@ -47,9 +47,7 @@ GLuint Shader::createShaderObject(GLenum shaderType, std::string filename) {
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &compileStatus);
 	if (compileStatus == GL_FALSE) {
 		GLuint count;
-		glGetShaderInfoLog(shader, max_buffer_size,
-			(GLsizei*)&count, buffer);
-
+		glGetShaderInfoLog(shader, max_buffer_size,(GLsizei*)&count, buffer);
 		return -1;
 	}
 	return shader;
