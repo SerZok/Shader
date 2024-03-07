@@ -59,3 +59,4 @@
 /x64/Debug/main.obj
 /x64/Debug/Shader.tlog/CL.write.1.tlog
 /SHADER/Example.fsh
+*.obj
