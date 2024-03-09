@@ -10,7 +10,6 @@ out vec4 fragColor;
 
 void main ()
 {
-
 	if(position.y<=-0.165){
 		fragColor=color1;
 	}

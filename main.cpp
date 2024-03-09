@@ -36,7 +36,7 @@ void main(int argc, char** argv){
 	// устанавливаем верхний левый угол окна
 	glutInitWindowPosition(200, 10);
 	// устанавливаем размер окна
-	glutInitWindowSize(800, 600);
+	glutInitWindowSize(500, 500);
 	// создание окна
 	glutCreateWindow("laba_02");
 
