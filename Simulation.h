@@ -7,5 +7,9 @@
 #include <glm/glm.hpp>
 #include "Data.h"
 extern float simulationTime;
-extern unsigned int lastClock;
+
 void simulation(void);
+void cameraSimulation();
+void keyboard(float& dx, float& dz, float& rx);
+void mouse(float&, float&);
+void mouseWheel(int, int, int, int);

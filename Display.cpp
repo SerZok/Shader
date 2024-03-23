@@ -2,7 +2,7 @@
 int final_time, FPS, init_time = time(NULL);
 int mCurrentTick;
 
-void getFPS() {
+void printFPS() {
 	FPS = mCurrentTick / (final_time - init_time);
 	init_time = time(NULL);
 	char windowTitle[50];
@@ -12,26 +12,45 @@ void getFPS() {
 }
 
 void display(void){
-	// отчищаем буфер цвета и буфер глубины
-	glClearColor(0.9, 0.9, 0.9, 1.0);
+	// очистка буфера кадра
+	glClearColor(0.8, 0.8, 0.8, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	// включаем тест глубины
+	// включение теста глубины (на всякий случай)
 	glEnable(GL_DEPTH_TEST);
-	// активируем шейдер
-	shader.activate();
-	shader.setUniform("offset", offset);
-	shader.setUniform("color1", color1);
-	shader.setUniform("color2", color2);
-	shader.setUniform("color3", color3);
+	// вывод полигонов в виде линий с отсечением нелицевых граней
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
 
-	// выводим прямоугольник 
-	drawObject();
+	// активация шейдера
+	shader.activate();
+
+	// устанавливаем матрицу проекции
+	mat4& projectionMatrix = camera.getProjectionMatrix();
+	shader.setUniform("projectionMatrix", projectionMatrix);
+
+	// устанавливаем матрицу камеры
+	mat4& viewMatrix = camera.getViewMatrix();
+
+	//выводим все объекты
+	for (auto& grObj : graphicObjects) {
+		// устанавливаем матрицу наблюдения модели
+		mat4 modelViewMatrix = viewMatrix * grObj.getModelMatrix();
+		shader.setUniform("modelViewMatrix", modelViewMatrix);
+
+		// устанавливаем цвет
+		shader.setUniform("color", grObj.getColor());
+
+		//выводим модель кубика
+		drawObject();
+	}
+
 	// смена переднего и заднего буферов
 	glutSwapBuffers();
 	
 	//FPS
 	mCurrentTick++;
 	if ((final_time - init_time) >= 1)
-		getFPS();
+		printFPS();
 	final_time = time(NULL);
 }

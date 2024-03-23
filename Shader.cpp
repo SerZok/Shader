@@ -53,17 +53,34 @@ GLuint Shader::createShaderObject(GLenum shaderType, std::string filename) {
 	return shader;
 }
 
-
-
+// установка uniform-переменных
+void Shader::setUniform(std::string name, int value) {
+	GLint location = getUniformLocation(name);
+	glUniform1i(location, value);
+}
+void Shader::setUniform(std::string name, float value) {
+	GLint location = getUniformLocation(name);
+	glUniform1f(location, value);
+}
 void Shader::setUniform(std::string name, glm::vec2& value) {
 	GLint location = getUniformLocation(name);
 	glUniform2f(location, value.x, value.y);
 }
-
 void Shader::setUniform(std::string name, glm::vec4& value) {
 	GLint location = getUniformLocation(name);
 	glUniform4f(location, value[0], value[1], value[2], value[3]);
 }
+void Shader::setUniform(std::string name, glm::mat4& value) {
+	GLint location = getUniformLocation(name);
+	GLfloat arr[16];
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			arr[j + i * 4] = value[i][j];
+		}
+	}
+	glUniformMatrix4fv(location, 1, 0, arr);
+}
+
 
 GLuint Shader::getUniformLocation(std::string name) {
 	GLuint a;

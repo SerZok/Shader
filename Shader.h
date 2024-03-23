@@ -5,17 +5,13 @@
 #include "stdio.h"
 #include <iostream>
 #include <fstream>
-
 #include "glew-2.1.0/include/GL/glew.h"
 #include "GL/freeglut.h"
-
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <map>
-
 using namespace std;
-
 
 class Shader{
 public:

@@ -18,10 +18,10 @@ using namespace glm;
 using namespace std;
 
 // функция, вызываемая при изменении размеров окна
-void reshape(int w, int h)
-{
+void reshape(int w, int h){
 	// установить новую область просмотра, равную всей области окна
 	glViewport(0, 0, w, h);
+	camera.setProjectionMatrix(35.0f, (float)w / h, 1.0f, 500.0f);
 }
 
 // основная функция
@@ -34,9 +34,9 @@ void main(int argc, char** argv){
 	glutInitContextVersion(3, 3);
 	glutInitContextProfile(GLUT_CORE_PROFILE);
 	// устанавливаем верхний левый угол окна
-	glutInitWindowPosition(200, 10);
+	glutInitWindowPosition(10, 50);
 	// устанавливаем размер окна
-	glutInitWindowSize(500, 500);
+	glutInitWindowSize(1280, 720);
 	// создание окна
 	glutCreateWindow("laba_02");
 
@@ -46,6 +46,8 @@ void main(int argc, char** argv){
 		fprintf(stderr, "Glew error: %s\n", glewGetErrorString(err));
 		return;
 	}
+
+	initData();
 
 	// определение текущей версии OpenGL
 	printf("OpenGL Version = %s\n\n", glGetString(GL_VERSION));
