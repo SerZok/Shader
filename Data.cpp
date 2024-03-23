@@ -1,26 +1,44 @@
 #include "Data.h"
+#include "Display.h"
 
 char window_title[256];
-unsigned int timer = 0;
 
+Camera camera;
 Shader shader;
+vector <GraphicObject>graphicObjects;
 
-// ƒјЌЌџ≈ ƒЋя ¬џ¬ќƒј ѕ–яћќ”√ќЋ№Ќ» ј
-// текущее смещение пр€моугольника
-vec2 offset = vec2(0, 0);
-// скорость (направление) перемещени€ пр€моугольника
-vec2 speed = vec2(+0.30, -0.25);
-
-vec4 color1 = vec4(1, 0, 0, 1);
-vec4 color2 = vec4(0, 0, 1, 1);
-vec4 color3 = vec4(1, 1, 1, 1);
 
 // функци€ дл€ инициализации всех общих данных (камера, объекты и т.д.)
 void initData() {
-
+	GraphicObject obj;
+	float ang = 0;
+	vec4 col0 = vec4(0, 0, 0, 1);
+	vec3 pos0 = vec3(0, 0, 0);
+	obj.setColor(col0);
+	obj.setPosition(pos0);
+	graphicObjects.push_back(obj);
+	for (int i = 0; i < 1000; i++) {
+		vec4 color = vec4(sin(i/3), sin(i/4), sin(i/5), 1);
+		vec4 color2 = vec4(cos(i/3), cos(i/4), cos(i/5), 1);
+		
+		if (i %2 == 0) {
+			obj.setColor(color2);
+		}
+		else {
+			obj.setColor(color);
+		}
+		vec3 pos = vec3(i*sin(i), 0, i*cos(-i));
+		obj.setPosition(pos);
+		obj.setAngle(ang);
+		ang += 15;
+		graphicObjects.push_back(obj);
+	}
 }
 // функци€ дл€ вывода квадрата с ребрами равными единице (от -0.5 до +0.5)
 void drawObject(){
+	
+
+
 	// переменные дл€ вывода объекта (пр€моугольника из двух треугольников)
 	static bool init = true;
 	static GLuint VAO_Index = 0;		// индекс VAO-буфера
@@ -33,13 +51,25 @@ void drawObject(){
 		// создание и заполнение VBO
 		glGenBuffers(1, &VBO_Index);
 		glBindBuffer(GL_ARRAY_BUFFER, VBO_Index);
-		GLfloat	Verteces[] = {
-			-0.5, +0.5,
-			-0.5, -0.5,
-			+0.5, +0.5,
-			+0.5, +0.5,
-			-0.5, -0.5,
-			+0.5, -0.5
+		GLfloat Verteces[] = {
+			// передн€€ грань (два треугольника)
+			-0.5, +0.5, +0.5, -0.5, -0.5, +0.5, +0.5, +0.5, +0.5,
+			+0.5, +0.5, +0.5, -0.5, -0.5, +0.5, +0.5, -0.5, +0.5,
+			// задн€€ грань (два треугольника)
+			+0.5, +0.5,	-0.5, +0.5, -0.5, -0.5, -0.5, +0.5, -0.5,
+			-0.5, +0.5,	-0.5, +0.5, -0.5, -0.5, -0.5, -0.5, -0.5,
+			// права€ грань (два треугольника) 
+			+0.5, -0.5,	+0.5, +0.5, -0.5, -0.5, +0.5, +0.5, +0.5,
+			+0.5, +0.5,	+0.5, +0.5, -0.5, -0.5, +0.5, +0.5, -0.5,
+			// лева€ грань (два треугольника)
+			-0.5, +0.5,	+0.5, -0.5, +0.5, -0.5, -0.5, -0.5, +0.5,
+			-0.5, -0.5,	+0.5, -0.5, +0.5, -0.5, -0.5, -0.5, -0.5,
+			// верхн€€ грань (два треугольника)
+			-0.5, +0.5, -0.5, -0.5, +0.5, +0.5, +0.5, +0.5, -0.5,
+			+0.5, +0.5, -0.5, -0.5, +0.5, +0.5, +0.5, +0.5, +0.5,
+			// нижн€€ грань (два треугольника)
+			-0.5, -0.5, +0.5, -0.5, -0.5, -0.5, +0.5, -0.5, +0.5,
+			+0.5, -0.5, +0.5, -0.5, -0.5, -0.5, +0.5, -0.5, -0.5
 		};
 		glBufferData(GL_ARRAY_BUFFER, sizeof(Verteces), Verteces, GL_STATIC_DRAW);
 
@@ -48,16 +78,18 @@ void drawObject(){
 		glBindVertexArray(VAO_Index);
 		// заполнение VAO
 		glBindBuffer(GL_ARRAY_BUFFER, VBO_Index);
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
-		glEnableVertexAttribArray(0);
+		int location = 0;
+		glVertexAttribPointer(location, 3, GL_FLOAT, GL_FALSE, 0, 0);
+		glEnableVertexAttribArray(location);
 		// "отв€зка" буфера VAO, чтоб случайно не испортить
 		glBindVertexArray(0);
 
 		// указание количество вершин
-		VertexCount = 3;
+		VertexCount = 6*6;
+		init = false;
 	}
 
 	// выводим пр€моугольник
 	glBindVertexArray(VAO_Index);
-	glDrawArrays(GL_TRIANGLES, 0, 8);
+	glDrawArrays(GL_TRIANGLES, 0, VertexCount);
 }

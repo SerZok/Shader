@@ -7,31 +7,20 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "GL/freeglut.h"
+
 #include "Shader.h"
+#include "Camera.h"
+#include "GraphicObject.h"
 
 // используемые пространства имен
 using namespace glm;
 using namespace std;
 
-extern LARGE_INTEGER frequency;        // частота счетчика производительности
-extern LARGE_INTEGER current_time;     // текущее значение счетчика производительности
-extern LARGE_INTEGER previous_time;    // значение счетчика производительности на предыдущем кадре
-extern double elapsed_time;            // время, затраченное на отрисовку кадра
-extern double fps;                     // количество кадров в секунду
-extern char window_title[256]; // заголовок окна
-extern unsigned int timer;
-
+extern Camera camera;
 extern Shader shader;
-// ДАННЫЕ ДЛЯ ВЫВОДА ПРЯМОУГОЛЬНИКА
-// текущее смещение прямоугольника
-extern vec2 offset;
-// скорость (направление) перемещения прямоугольника
-extern vec2 speed;
-// первый цвет (для градиентной заливки)
-extern vec4 color1;
-// второй цвет (для градиентной заливки)
-extern vec4 color2;
-extern vec4 color3;
+
+// СПИСОК ГРАФИЧЕСКИХ ОБЪЕКТОВ ДЛЯ ВЫВОДА НА ЭКРАН
+extern vector <GraphicObject>graphicObjects;
 
 void initData();
 void drawObject();
