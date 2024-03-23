@@ -1,4 +1,5 @@
 #include "Shader.h"
+unsigned int Shader::currentProgram = 0;
 
 bool Shader::load(std::string veftexShaderFilename, std::string fragmentShaderFilename) {
 	program = glCreateProgram();
@@ -9,47 +10,18 @@ bool Shader::load(std::string veftexShaderFilename, std::string fragmentShaderFi
 }
 // выбор шейдера в качестве текущего
 void Shader::activate() {
-	glUseProgram(program);
+	if (currentProgram != program) {
+		glUseProgram(program);
+		currentProgram = program;
+	}
 }
 
 // отключение шейдера
 void Shader::deactivate() {
 	glUseProgram(0);
+	currentProgram = 0;
 }
-void Shader::getStrings(string filename) {
-	fstream File;
-	File.open(filename);
-	if (!File) {
-		cout << "Error shader file\n";
-	}
-	else {
-		cout << "Shader file '" << filename << "' open\n";
-	}
-	string line;
-	int count = 0;
-	while (!File.eof()) {
-		getline(File, line);
-		count++;
-		cout << line << endl;
-	}
-	File.close();
-	cout << "Num: " << count << endl;
-	const GLchar** lines;
-	lines = new const GLchar * [count];
-	GLint* str_size = new GLint[count];
-	File.open(filename);
-	int i = 0;
-	while (!File.eof()) {
-		getline(File, line);
-		int size = line.size();
-		cout << size << endl;
-		lines[i] = new GLchar[size];
-		lines[i] = line.c_str();
-		str_size[i] = line.size();
-		i++;
-	}
 
-}
 // создание шейдерного объекта указанного типа
 	// и загрузка исходного текста шейдера из указанного файла
 GLuint Shader::createShaderObject(GLenum shaderType, std::string filename) {
@@ -75,10 +47,47 @@ GLuint Shader::createShaderObject(GLenum shaderType, std::string filename) {
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &compileStatus);
 	if (compileStatus == GL_FALSE) {
 		GLuint count;
-		glGetShaderInfoLog(shader, max_buffer_size,
-			(GLsizei*)&count, buffer);
-
+		glGetShaderInfoLog(shader, max_buffer_size,(GLsizei*)&count, buffer);
 		return -1;
 	}
 	return shader;
+}
+
+// установка uniform-переменных
+void Shader::setUniform(std::string name, int value) {
+	GLint location = getUniformLocation(name);
+	glUniform1i(location, value);
+}
+void Shader::setUniform(std::string name, float value) {
+	GLint location = getUniformLocation(name);
+	glUniform1f(location, value);
+}
+void Shader::setUniform(std::string name, glm::vec2& value) {
+	GLint location = getUniformLocation(name);
+	glUniform2f(location, value.x, value.y);
+}
+void Shader::setUniform(std::string name, glm::vec4& value) {
+	GLint location = getUniformLocation(name);
+	glUniform4f(location, value[0], value[1], value[2], value[3]);
+}
+void Shader::setUniform(std::string name, glm::mat4& value) {
+	GLint location = getUniformLocation(name);
+	GLfloat arr[16];
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			arr[j + i * 4] = value[i][j];
+		}
+	}
+	glUniformMatrix4fv(location, 1, 0, arr);
+}
+
+
+GLuint Shader::getUniformLocation(std::string name) {
+	GLuint a;
+	if (uniforms.count(name) == 0) {
+		a = glGetUniformLocation(program, name.c_str());
+		uniforms[name] = a;
+		return a;
+	}
+	return uniforms[name];
 }

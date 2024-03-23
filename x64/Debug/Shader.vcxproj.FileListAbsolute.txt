@@ -1,1 +1,2 @@
 C:\STUDY\AOKG\Shader\x64\Debug\Shader.exe
+D:\!moi\AOKG\Shader\x64\Debug\Shader.exe
