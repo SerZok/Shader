@@ -1,6 +1,6 @@
 #include "Camera.h"
 Camera::Camera() {
-	cameraPosition = vec3(0, 5, 5);
+	cameraPosition = vec3(-5, 5, 25);
 	observationPoint = vec3(0, 0, 0);
 	dMove = vec3(0, 0, 0);
 	radius = length(cameraPosition - observationPoint);
@@ -39,11 +39,11 @@ void Camera::rotate(float horizAngle, float vertAngle) {
 	horizAng += horizAngle;
 	vertAng += vertAngle;
 
-	if (vertAng > 89)
-		vertAng = 89;
+	if (vertAng > 85)
+		vertAng = 85;
 
-	if (vertAng < 0) 
-		vertAng = 0;
+	if (vertAng < 5) 
+		vertAng = 5;
 
 	recalculateViewMatrix();
 }

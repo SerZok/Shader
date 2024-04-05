@@ -19,13 +19,16 @@ void GraphicObject::setPosition(vec3& position) {
 	modelMatrix[3][2] = position.z;
 }
 // установить угол поворота в градусах относительно оси OY по часовой стрелке
-void GraphicObject::setAngle(float degree) {
+void GraphicObject::setAngleOY(float degree) {
 	float rad = radians(degree);
 	modelMatrix[0][0] = cos(rad);
 	modelMatrix[0][2] = sin(rad);
 	modelMatrix[2][0] = -sin(rad);
 	modelMatrix[2][2] = cos(rad);
 }
+
+
+
 // получить различные параметры
 vec4& GraphicObject::getColor() {
 	return color;
@@ -33,6 +36,15 @@ vec4& GraphicObject::getColor() {
 mat4& GraphicObject::getModelMatrix() {
 	return modelMatrix;
 }
+
+void GraphicObject::setMeshId(int id) {
+	meshId = id;
+}
+
+int GraphicObject::getMeshId() {
+	return meshId;
+}
+
 //
 //vec3 GraphicObject::getPosition() {
 //	return vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);

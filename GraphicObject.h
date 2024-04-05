@@ -19,13 +19,18 @@ public:
 	// установить позицию объекта
 	void setPosition(vec3& position);
 	// установить угол поворота в градусах относительно оси OY по часовой стрелке
-	void setAngle(float degree);
+	void setAngleOY(float degree);
 	// получить различные параметры
 	vec4& getColor();
 	mat4& getModelMatrix();
 
+	void setMeshId(int id);
+	int getMeshId();
+
 	//vec3 getPosition();
 private:
+	// идентификатор используемого меша
+	int meshId;
 	// цвет объекта
 	vec4 color;
 	// матрица модели (задает позицию и ориентацию)
