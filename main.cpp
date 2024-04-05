@@ -21,7 +21,7 @@ using namespace std;
 void reshape(int w, int h){
 	// установить новую область просмотра, равную всей области окна
 	glViewport(0, 0, w, h);
-	camera.setProjectionMatrix(35.0f, (float)w / h, 1.0f, 500.0f);
+	camera.setProjectionMatrix(50.0f, (float)w / h, 1.0f, 500.0f);
 }
 
 // основная функция

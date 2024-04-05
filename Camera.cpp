@@ -1,6 +1,6 @@
 #include "Camera.h"
 Camera::Camera() {
-	cameraPosition = vec3(10, 10, 1);
+	cameraPosition = vec3(0, 5, 5);
 	observationPoint = vec3(0, 0, 0);
 	dMove = vec3(0, 0, 0);
 	radius = length(cameraPosition - observationPoint);

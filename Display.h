@@ -7,3 +7,5 @@
 #include "Shader.h"
 void display(void);
 void printFPS();
+
+extern int tick;

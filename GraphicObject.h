@@ -23,6 +23,8 @@ public:
 	// получить различные параметры
 	vec4& getColor();
 	mat4& getModelMatrix();
+
+	//vec3 getPosition();
 private:
 	// цвет объекта
 	vec4 color;

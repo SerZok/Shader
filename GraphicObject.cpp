@@ -33,3 +33,7 @@ vec4& GraphicObject::getColor() {
 mat4& GraphicObject::getModelMatrix() {
 	return modelMatrix;
 }
+//
+//vec3 GraphicObject::getPosition() {
+//	return vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
+//}

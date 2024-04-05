@@ -1,26 +1,33 @@
 #include "Data.h"
+#include "Display.h"
 
 char window_title[256];
-unsigned int timer = 0;
 
 Camera camera;
 Shader shader;
 vector <GraphicObject>graphicObjects;
 
+
 // функция для инициализации всех общих данных (камера, объекты и т.д.)
 void initData() {
+	GraphicObject obj;
 	float ang = 0;
-	for (int i = 0; i < 9; i++) {
-		vec4 color = vec4(1, 0, 0, 1);
-		vec4 color2 = vec4(0, 1, 1, 1);
-		GraphicObject obj;
-		if (i == 4) {
+	vec4 col0 = vec4(0, 0, 0, 1);
+	vec3 pos0 = vec3(0, 0, 0);
+	obj.setColor(col0);
+	obj.setPosition(pos0);
+	graphicObjects.push_back(obj);
+	for (int i = 0; i < 1000; i++) {
+		vec4 color = vec4(sin(i/3), sin(i/4), sin(i/5), 1);
+		vec4 color2 = vec4(cos(i/3), cos(i/4), cos(i/5), 1);
+		
+		if (i %2 == 0) {
 			obj.setColor(color2);
 		}
 		else {
 			obj.setColor(color);
 		}
-		vec3 pos = vec3((i % 3) * 2, 0, ((int)i / 3) * 2);
+		vec3 pos = vec3(i*sin(i), 0, i*cos(-i));
 		obj.setPosition(pos);
 		obj.setAngle(ang);
 		ang += 15;
@@ -29,6 +36,9 @@ void initData() {
 }
 // функция для вывода квадрата с ребрами равными единице (от -0.5 до +0.5)
 void drawObject(){
+	
+
+
 	// переменные для вывода объекта (прямоугольника из двух треугольников)
 	static bool init = true;
 	static GLuint VAO_Index = 0;		// индекс VAO-буфера
