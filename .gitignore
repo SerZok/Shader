@@ -59,4 +59,9 @@
 /x64/Debug/main.obj
 /x64/Debug/Shader.tlog/CL.write.1.tlog
 /SHADER/Example.fsh
-*.obj
+/x64/Debug/Camera.obj
+/x64/Debug/Data.obj
+/x64/Debug/Display.obj
+/x64/Debug/GraphicObject.obj
+/x64/Debug/Mesh.obj
+/x64/Debug/ResourceManager.obj

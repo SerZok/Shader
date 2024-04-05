@@ -8,9 +8,10 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "GL/freeglut.h"
 
-#include "Shader.h"
 #include "Camera.h"
+#include "Shader.h"
 #include "GraphicObject.h"
+#include "ResourceManager.h"
 
 // используемые пространства имен
 using namespace glm;
