@@ -16,6 +16,7 @@ void initData() {
 	vec4 color4 = vec4(0.2, 0.2, 0.7, 1);
 	vec4 color5 = vec4(0.2, 0.2, 0.7, 1);
 	vec4 color6 = vec4(0.9, 0.4, 0.2, 1);
+	vec4 color7 = vec4(0.8, 0.8, 0.2, 1);
 
 	vec3 pos1 = vec3(0, 0, 0);
 	vec3 pos2 = vec3(7.5, -0.75, 2.5);
@@ -23,6 +24,8 @@ void initData() {
 	vec3 pos4 = vec3(+5, -2.15, +6.5);
 	vec3 pos5 = vec3(-5, -2.15, +10.5);
 	vec3 pos6 = vec3(0, 2.9, 0);
+	vec3 pos7 = vec3(-5, -2.15, 5);
+	
 
 
 	// ссылка на менеджер ресурсов (для удобства)
@@ -64,20 +67,19 @@ void initData() {
 	graphicObject.setAngleOY(-115.0);
 	graphicObjects.push_back(graphicObject);
 
-	//Машина
-	meshId = rm.loadMesh("MESHES\\vehicles\\police_car.obj");
-	graphicObject.setMeshId(meshId);
-	graphicObject.setColor(color5);
-	graphicObject.setPosition(pos5);
-	graphicObject.setAngleOY(+115.0);
-	graphicObjects.push_back(graphicObject);
-
 	//Джип
 	meshId = rm.loadMesh("MESHES\\vehicles\\jeep.obj");
 	graphicObject.setMeshId(meshId);
 	graphicObject.setColor(color6);
 	graphicObject.setPosition(pos6);
 	graphicObject.setAngleOY(-90.0);
+	graphicObjects.push_back(graphicObject);
+
+	
+	meshId = rm.loadMesh("MESHES\\props\\bench_1.obj");
+	graphicObject.setMeshId(meshId);
+	graphicObject.setColor(color7);
+	graphicObject.setPosition(pos7);
 	graphicObjects.push_back(graphicObject);
 }
 
