@@ -9,9 +9,10 @@ bool Mesh::load(std::string filename)
     std::vector<GLuint> indices;
 
     std::ifstream file(filename);
-    if (!file.is_open())
+    if (!file.is_open()) {
+        cout << "Can't open Mesh: " << filename << endl<<endl;
         return -1;
-
+    }
     std::vector<glm::vec3> v;
     std::vector<glm::vec3> n;
     std::vector<glm::vec2> t;

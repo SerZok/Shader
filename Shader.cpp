@@ -39,6 +39,8 @@ GLuint Shader::createShaderObject(GLenum shaderType, std::string filename) {
 		cout << "Can't create shader\n";
 		return -1;
 	}
+	cout << "******************************" << endl;
+	cout << "Shader: " << filename << endl<<endl;
 	const char* source_pointer[] = { buffer };
 	glShaderSource(shader, 1, source_pointer, 0);
 	cout << buffer;

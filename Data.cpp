@@ -17,24 +17,58 @@ void initData() {
 	int textureId = -1;
 	GraphicObject graphicObject;
 
+	//ДОМ
 	meshId = resource.loadMesh("MESHES\\buildings\\house_2.obj");
 	graphicObject.setMeshId(meshId);
 	textureId = resource.loadTexture("TEXTURES\\buildings\\house_2_orange.png");
-
 	vec4 color1 = vec4(0.2, 0.2, 0.2, 1);
 	vec3 pos1 = vec3(0, 0, 0);
-
 	graphicObject.setColor(color1);
 	graphicObject.setTextureId(textureId);
 	graphicObject.setPosition(pos1);
 	graphicObject.setAngleOY(0.0);
 	graphicObjects.push_back(graphicObject);
 
+	//Дерево
+	meshId = resource.loadMesh("MESHES\\natures\\big_tree.obj");
+	graphicObject.setMeshId(meshId);
+	textureId = resource.loadTexture("TEXTURES\\natures\\nature.png");
+	vec4 color2 = vec4(0.2, 0.2, 0.2, 1);
+	vec3 pos2 = vec3(7.5, -0.75, 2.5);
+	graphicObject.setColor(color2);
+	graphicObject.setTextureId(textureId);
+	graphicObject.setPosition(pos2);
+	graphicObject.setAngleOY(0.0);
+	graphicObjects.push_back(graphicObject);
+
+	//Скамейка
+	meshId = resource.loadMesh("MESHES\\props\\bench_1.obj");
+	graphicObject.setMeshId(meshId);
+	textureId = resource.loadTexture("TEXTURES\\props\\props.png");
+	vec4 color3 = vec4(0.2, 0.2, 0.2, 1);
+	vec3 pos3 = vec3(-6.5, -2, 2.5);
+	graphicObject.setColor(color3);
+	graphicObject.setTextureId(textureId);
+	graphicObject.setPosition(pos3);
+	graphicObject.setAngleOY(45.0);
+	graphicObjects.push_back(graphicObject);
+
+	//Jeep
+	meshId = resource.loadMesh("MESHES\\vehicles\\jeep.obj");
+	graphicObject.setMeshId(meshId);
+	textureId = resource.loadTexture("TEXTURES\\vehicles\\jeep_green.png");
+	vec4 color4 = vec4(0.2, 0.2, 0.2, 1);
+	vec3 pos4 = vec3(3.5, -1.6, 6.5);
+	graphicObject.setColor(color4);
+	graphicObject.setTextureId(textureId);
+	graphicObject.setPosition(pos4);
+	graphicObject.setAngleOY(90.0);
+	graphicObjects.push_back(graphicObject);
+
 }
 
 // функция для вывода квадрата с ребрами равными единице (от -0.5 до +0.5)
 void drawObject(){
-	
 	// переменные для вывода объекта (прямоугольника из двух треугольников)
 	static bool init = true;
 	static GLuint VAO_Index = 0;		// индекс VAO-буфера

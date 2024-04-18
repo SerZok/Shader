@@ -43,19 +43,20 @@ void main(int argc, char** argv){
 	// устанавливаем размер окна
 	glutInitWindowSize(1280, 720);
 	// создание окна
-	glutCreateWindow("laba_02");
+	glutCreateWindow("AGS");
 
 	// инициализация GLEW 
 	GLenum err = glewInit();
-	if (GLEW_OK != err){
+	if (GLEW_OK != err) {
 		fprintf(stderr, "Glew error: %s\n", glewGetErrorString(err));
 		return;
 	}
 
-	initData();
-
 	// определение текущей версии OpenGL
 	printf("OpenGL Version = %s\n\n", glGetString(GL_VERSION));
+
+	initData();
+
 
 	// устанавливаем функцию, которая будет вызываться для перерисовки окна
 	glutDisplayFunc(display);
