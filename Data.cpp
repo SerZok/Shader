@@ -17,18 +17,31 @@ void initData() {
 	int textureId = -1;
 	GraphicObject graphicObject;
 
+	//ДОМ
 	meshId = resource.loadMesh("MESHES\\buildings\\house_2.obj");
 	graphicObject.setMeshId(meshId);
 	textureId = resource.loadTexture("TEXTURES\\buildings\\house_2_orange.png");
-
 	vec4 color1 = vec4(0.2, 0.2, 0.2, 1);
 	vec3 pos1 = vec3(0, 0, 0);
-
 	graphicObject.setColor(color1);
 	graphicObject.setTextureId(textureId);
 	graphicObject.setPosition(pos1);
 	graphicObject.setAngleOY(0.0);
 	graphicObjects.push_back(graphicObject);
+
+	//Дерево
+	meshId = resource.loadMesh("MESHES\\natures\\big_tree.obj");
+	graphicObject.setMeshId(meshId);
+	textureId = resource.loadTexture("TEXTURES\\natures\\nature.png");
+	vec4 color2 = vec4(0.2, 0.2, 0.2, 1);
+	vec3 pos2 = vec3(7.5, -0.75, 2.5);
+	graphicObject.setColor(color2);
+	graphicObject.setTextureId(textureId);
+	graphicObject.setPosition(pos2);
+	graphicObject.setAngleOY(0.0);
+	graphicObjects.push_back(graphicObject);
+
+	
 
 }
 

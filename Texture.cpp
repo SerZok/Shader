@@ -1,7 +1,4 @@
 ﻿#include "Texture.h"
-#include <iostream>
-#include "IL/il.h"
-#include <codecvt>
 
 
 using namespace std;
@@ -15,19 +12,18 @@ void Texture::load(std::string filename) {
 	ilBindImage(imageID);
 	
 	std::wstring filename_w(filename.begin(), filename.end());
-
 	if (ilLoadImage(filename_w.c_str())) {
-		cout << "Texture " << filename << " open success\n";
+		cout << "Texture: " << filename << " open success\n";
 	}
 	else {
-		cout << "!Texture ERROR: " << filename << " !\n";
+		cout << "ERROR: " << filename << " !\n";
 		return;
 	}
 	int width = ilGetInteger(IL_IMAGE_WIDTH);
 	int	height = ilGetInteger(IL_IMAGE_HEIGHT);
 	int	format = ilGetInteger(IL_IMAGE_FORMAT);
 	int type = ilGetInteger(IL_IMAGE_TYPE);
-	cout <<"Width: " << width << "\nHeight: " << height << "\nFormat: " << format << "\nType: " << type << endl;
+	cout <<"Width: " << width << "\nHeight: " << height << "\nFormat: " << format << "\nType: " << type << endl<<endl;
 	char* pixels = new char[width * height * 4];
 	ilCopyPixels(0, 0, 0, width, height, 1, IL_RGBA, IL_UNSIGNED_BYTE, pixels);
 
