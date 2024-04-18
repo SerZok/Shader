@@ -30,7 +30,7 @@ GLuint Shader::createShaderObject(GLenum shaderType, std::string filename) {
 
 	ifstream file(filename);
 	if (!file.is_open()) {
-		cout << "Not found" << endl;
+		cout << "Shader not found" << endl;
 		return -1;
 	}
 	file.getline(buffer, max_buffer_size, 0);

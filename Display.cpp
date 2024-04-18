@@ -1,65 +1,36 @@
 #include "Display.h"
 int final_time, FPS, init_time = time(NULL);
 int mCurrentTick;
-int tick;
 
 void printFPS() {
-	FPS = mCurrentTick / (final_time - init_time);
-	init_time = time(NULL);
-	char windowTitle[50];
-	sprintf_s(windowTitle, 50, "LAB_4 | FPS : %i |", mCurrentTick);
-	glutSetWindowTitle(windowTitle);
-	mCurrentTick = 0;
+	mCurrentTick++;
+	if ((final_time - init_time) >= 1) {
+		FPS = mCurrentTick / (final_time - init_time);
+		init_time = time(NULL);
+		char windowTitle[50];
+		sprintf_s(windowTitle, 50, "LAB_5 | FPS : %i |", mCurrentTick);
+		glutSetWindowTitle(windowTitle);
+		mCurrentTick = 0;
+	}
+	final_time = time(NULL);
 }
 
 void display(void){
-	// очистка буфера кадра
-	glClearColor(0.5, 0.5, 0.5, 1.0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	// включение теста глубины (на вс€кий случай)
-	glEnable(GL_DEPTH_TEST);
-	// вывод полигонов в виде линий с отсечением нелицевых граней
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
+	RenderManager& renderManager = RenderManager::instance();
+	renderManager.setCamera(&camera);
+	// начинаем вывод нового кадра
+	renderManager.start();
 
-	// активаци€ шейдера
-	shader.activate();
-
-	// устанавливаем матрицу проекции
-	mat4& projectionMatrix = camera.getProjectionMatrix();
-	shader.setUniform("projectionMatrix", projectionMatrix);
-
-	// устанавливаем матрицу камеры
-	mat4& viewMatrix = camera.getViewMatrix();
-
-	//выводим все объекты
-	for (auto& grObj : graphicObjects) {
-		// устанавливаем матрицу наблюдени€ модели
-		mat4 modelViewMatrix = viewMatrix * grObj.getModelMatrix();
-		shader.setUniform("modelViewMatrix", modelViewMatrix);
-
-		// устанавливаем цвет
-		shader.setUniform("color", grObj.getColor());
-		
-		//выводим меш
-		int meshId = grObj.getMeshId();
-		Mesh* mesh = ResourceManager::instance().getMesh(meshId);
-		if (mesh != nullptr) {
-			mesh->drawOne();
-		}
+	// акие объекты надо вывести
+	for (auto& graphicObject : graphicObjects) {
+		renderManager.addToRenderQueue(graphicObject);
 	}
+
+	// завершаем построение кадра
+	renderManager.finish();
 
 	// смена переднего и заднего буферов
 	glutSwapBuffers();
 	
-	//FPS
-	mCurrentTick++;
-	if ((final_time - init_time) >= 1)
-		printFPS();
-	final_time = time(NULL);
-
-	tick++;
-	if (tick > 360)
-		tick = 0;
+	printFPS();
 }
