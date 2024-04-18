@@ -15,6 +15,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "Mesh.h"
+#include "Texture.h"
 using namespace std;
 using namespace glm;
 
@@ -32,9 +33,15 @@ public:
 	// «агрузка одного меша из указанного obj-файла
 	// ¬озвращаемое значение - индекс меша в менеджере ресурсов
 	int loadMesh(std::string filename);
+
+	int loadTexture(string);
+
+
 	// ѕолучение меша по его индексу
 	// ≈сли такого меша нет (недействительный индекс) возвращаетс€ nullptr
 	Mesh* getMesh(int index);
+
+	Texture* getTexture(int);
 private:
 	// конструктор по умолчанию (объ€влен приватным)
 	// в результате нельз€ создать ни одного объекта данного класса вне самого класса
@@ -46,7 +53,10 @@ private:
 private:
 	// вектор дл€ хранени€ всех мешей
 	std::vector<Mesh> meshes;
+	std::vector<Texture> textures;
+
 	// map дл€ хранени€ соответстви€ между именем запрашиваемого файла
 	// и индексом в контейнере meshes
 	std::map <std::string, int> meshes_id;
+	std::map <std::string, int> textures_id;
 };

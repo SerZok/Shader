@@ -28,6 +28,9 @@ void GraphicObject::setAngleOY(float degree) {
 }
 
 
+void GraphicObject::setTextureId(int Id) {
+	textureId = Id;
+}
 
 // получить различные параметры
 vec4& GraphicObject::getColor() {
@@ -45,7 +48,6 @@ int GraphicObject::getMeshId() {
 	return meshId;
 }
 
-//
-//vec3 GraphicObject::getPosition() {
-//	return vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
-//}
+int GraphicObject::getTextureId() {
+	return textureId;
+}

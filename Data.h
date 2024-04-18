@@ -12,6 +12,7 @@
 #include "Shader.h"
 #include "GraphicObject.h"
 #include "ResourceManager.h"
+#include "RenderManager.h"
 
 // используемые пространства имен
 using namespace glm;

@@ -28,6 +28,11 @@ void reshape(int w, int h){
 void main(int argc, char** argv){
 	// инициализация библиотеки GLUT
 	glutInit(&argc, argv);
+
+	ilInit();
+	iluInit();
+	ilutInit();
+
 	// инициализация дисплея (формат вывода)
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_STENCIL | GLUT_MULTISAMPLE);
 	// требования к версии OpenGL (версия 3.3 без поддержки обратной совместимости)
@@ -52,9 +57,6 @@ void main(int argc, char** argv){
 	// определение текущей версии OpenGL
 	printf("OpenGL Version = %s\n\n", glGetString(GL_VERSION));
 
-	// загрузка шейдера
-	shader.load("SHADER\\Example.vsh", "SHADER\\Example.fsh");
-
 	// устанавливаем функцию, которая будет вызываться для перерисовки окна
 	glutDisplayFunc(display);
 	// устанавливаем функцию, которая будет вызываться при изменении размеров окна
@@ -63,5 +65,5 @@ void main(int argc, char** argv){
 	glutIdleFunc(simulation);
 	// основной цикл обработки сообщений ОС
 	glutMainLoop();
-	return;
+	return ;
 }

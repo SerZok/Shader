@@ -5,6 +5,8 @@
 #include <glm/glm.hpp>
 #include "Data.h"
 #include "Shader.h"
+#include "RenderManager.h"
+
 void display(void);
 void printFPS();
 
