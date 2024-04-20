@@ -11,13 +11,14 @@ void RenderManager::start() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
 
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	//glEnable(GL_CULL_FACE);
-	//glCullFace(GL_BACK);
-
 	shaders[0].activate();
 	mat4& projectionMatrix = camera->getProjectionMatrix();
 	shaders[0].setUniform("projectionMatrix", projectionMatrix);
+
+	shaders[0].setUniform("lAmbient", light.getAmbient());
+	shaders[0].setUniform("lDiffuse", light.getDiffuse());
+	shaders[0].setUniform("lSpecular", light.getSpecular());
+	shaders[0].setUniform("lPosition", light.getDirection());
 
 	graphicObjects.clear();
 }
@@ -34,9 +35,16 @@ void RenderManager::finish() {
 	mat4& viewMatrix = camera->getViewMatrix();
 	for (auto& graphicObject : graphicObjects) {
 		mat4 modelViewMatrix = viewMatrix * graphicObject.getModelMatrix();
+		int materialId = graphicObject.getMaterialId();
 		shaders[0].setUniform("modelViewMatrix", modelViewMatrix);
-
 		shaders[0].setUniform("color", graphicObject.getColor());
+		Material* mater = ResourceManager::instance().getMaterial(materialId);
+		if (mater != nullptr) {
+			shaders[0].setUniform("mAmbient", mater->getAmbient());
+			shaders[0].setUniform("mDiffuse", mater->getDiffuse());
+			shaders[0].setUniform("mSpecular", mater->getSpecular());
+			shaders[0].setUniform("mShininess", mater->getShininess());
+		}
 
 		int textureId = graphicObject.getTextureId();
 		Texture* texture = ResourceManager::instance().getTexture(textureId);

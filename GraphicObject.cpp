@@ -27,6 +27,9 @@ void GraphicObject::setAngleOY(float degree) {
 	modelMatrix[2][2] = cos(rad);
 }
 
+void GraphicObject::setMaterialId(int id) {
+	materialId = id;
+}
 
 void GraphicObject::setTextureId(int Id) {
 	textureId = Id;
@@ -50,4 +53,8 @@ int GraphicObject::getMeshId() {
 
 int GraphicObject::getTextureId() {
 	return textureId;
+}
+
+int GraphicObject::getMaterialId() {
+	return materialId;
 }

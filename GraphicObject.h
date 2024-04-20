@@ -21,22 +21,23 @@ public:
 	// установить угол поворота в градусах относительно оси OY по часовой стрелке
 	void setAngleOY(float degree);
 	void setTextureId(int Id);
-
+	void setMeshId(int id);
+	void setMaterialId(int id);
 
 	vec4& getColor();
 	mat4& getModelMatrix();
-
-	void setMeshId(int id);
 	int getMeshId();
 	int getTextureId();
-private:
-	// идентификатор используемого меша
-	int meshId;
+	int getMaterialId();
 
+private:
+	int meshId;
 	int textureId;
+	int materialId;
+
 	// цвет объекта
 	vec4 color;
 	// матрица модели (задает позицию и ориентацию)
 	mat4 modelMatrix;
-
+	
 };

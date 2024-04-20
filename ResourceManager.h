@@ -16,6 +16,7 @@
 
 #include "Mesh.h"
 #include "Texture.h"
+#include "Material.h"
 using namespace std;
 using namespace glm;
 
@@ -33,15 +34,14 @@ public:
 	// «агрузка одного меша из указанного obj-файла
 	// ¬озвращаемое значение - индекс меша в менеджере ресурсов
 	int loadMesh(std::string filename);
-
 	int loadTexture(string);
-
-
+	int loadMaterial(string);
+	
 	// ѕолучение меша по его индексу
 	// ≈сли такого меша нет (недействительный индекс) возвращаетс€ nullptr
 	Mesh* getMesh(int index);
-
 	Texture* getTexture(int);
+	Material* getMaterial(int);
 private:
 	// конструктор по умолчанию (объ€влен приватным)
 	// в результате нельз€ создать ни одного объекта данного класса вне самого класса
@@ -54,9 +54,11 @@ private:
 	// вектор дл€ хранени€ всех мешей
 	std::vector<Mesh> meshes;
 	std::vector<Texture> textures;
+	std::vector<Material> materials;
 
 	// map дл€ хранени€ соответстви€ между именем запрашиваемого файла
 	// и индексом в контейнере meshes
 	std::map <std::string, int> meshes_id;
 	std::map <std::string, int> textures_id;
+	std::map <string, int> materials_id;
 };
