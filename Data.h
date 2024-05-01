@@ -9,6 +9,7 @@
 #include "GL/freeglut.h"
 
 #include "Camera.h"
+#include "Light.h"
 #include "Shader.h"
 #include "GraphicObject.h"
 #include "ResourceManager.h"
@@ -20,6 +21,8 @@ using namespace std;
 
 extern Camera camera;
 extern Shader shader;
+extern Light light;
+
 
 // ÑÏÈÑÎÊ ÃĞÀÔÈ×ÅÑÊÈÕ ÎÁÚÅÊÒÎÂ ÄËß ÂÛÂÎÄÀ ÍÀ İÊĞÀÍ
 extern vector <GraphicObject>graphicObjects;

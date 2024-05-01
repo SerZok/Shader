@@ -7,14 +7,13 @@ void RenderManager::init() {
 }
 
 void RenderManager::start() {
-	glClearColor(1.0, 1.0, 1.0, 1.0);
+	glClearColor(0.69, 0.69, 0.69, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
 
 	shaders[0].activate();
 	mat4& projectionMatrix = camera->getProjectionMatrix();
 	shaders[0].setUniform("projectionMatrix", projectionMatrix);
-
 	shaders[0].setUniform("lAmbient", light.getAmbient());
 	shaders[0].setUniform("lDiffuse", light.getDiffuse());
 	shaders[0].setUniform("lSpecular", light.getSpecular());

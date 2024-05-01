@@ -5,48 +5,62 @@ char window_title[256];
 
 Camera camera;
 Shader shader;
+Light light;
 vector <GraphicObject>graphicObjects;
+
 
 
 // функция для инициализации всех общих данных (камера, объекты и т.д.)
 void initData() {
 	RenderManager::instance().init();
-	ResourceManager& resource = ResourceManager::instance();
+	ResourceManager& resourceManger = ResourceManager::instance();
 
 	int meshId = -1;
 	int textureId = -1;
+	int materialId = -1;
 	GraphicObject graphicObject;
 
 	//ДОМ
-	meshId = resource.loadMesh("MESHES\\buildings\\house_2.obj");
-	graphicObject.setMeshId(meshId);
-	textureId = resource.loadTexture("TEXTURES\\buildings\\house_2_orange.png");
+	meshId = resourceManger.loadMesh("MESHES\\buildings\\house_2.obj");
+	textureId = resourceManger.loadTexture("TEXTURES\\buildings\\house_2_orange.png");
+	materialId = resourceManger.loadMaterial("MATERIALS\\dull_material.json");
 	vec4 color1 = vec4(0.2, 0.2, 0.2, 1);
 	vec3 pos1 = vec3(0, 0, 0);
-	graphicObject.setColor(color1);
+
+	graphicObject.setMeshId(meshId);
 	graphicObject.setTextureId(textureId);
+	graphicObject.setMaterialId(materialId);
+	graphicObject.setColor(color1);
 	graphicObject.setPosition(pos1);
 	graphicObject.setAngleOY(0.0);
 	graphicObjects.push_back(graphicObject);
 
+
 	//Дерево
-	meshId = resource.loadMesh("MESHES\\natures\\big_tree.obj");
-	graphicObject.setMeshId(meshId);
-	textureId = resource.loadTexture("TEXTURES\\natures\\nature.png");
+	meshId = resourceManger.loadMesh("MESHES\\natures\\big_tree.obj");
+	textureId = resourceManger.loadTexture("TEXTURES\\natures\\nature.png");
+	materialId = resourceManger.loadMaterial("MATERIALS\\dull_material.json");
 	vec4 color2 = vec4(0.2, 0.2, 0.2, 1);
 	vec3 pos2 = vec3(7.5, -0.75, 2.5);
-	graphicObject.setColor(color2);
+
+	graphicObject.setMeshId(meshId);
 	graphicObject.setTextureId(textureId);
+	graphicObject.setMaterialId(materialId);
+	graphicObject.setColor(color2);
 	graphicObject.setPosition(pos2);
 	graphicObject.setAngleOY(0.0);
 	graphicObjects.push_back(graphicObject);
 
 	//Скамейка
-	meshId = resource.loadMesh("MESHES\\props\\bench_1.obj");
-	graphicObject.setMeshId(meshId);
-	textureId = resource.loadTexture("TEXTURES\\props\\props.png");
+	meshId = resourceManger.loadMesh("MESHES\\props\\bench_1.obj");
+	textureId = resourceManger.loadTexture("TEXTURES\\props\\props.png");
+	materialId = resourceManger.loadMaterial("MATERIALS\\shiny_material.json");
 	vec4 color3 = vec4(0.2, 0.2, 0.2, 1);
 	vec3 pos3 = vec3(-6.5, -2, 2.5);
+
+	graphicObject.setMeshId(meshId);
+	graphicObject.setTextureId(textureId);
+	graphicObject.setMaterialId(materialId);
 	graphicObject.setColor(color3);
 	graphicObject.setTextureId(textureId);
 	graphicObject.setPosition(pos3);
@@ -54,11 +68,15 @@ void initData() {
 	graphicObjects.push_back(graphicObject);
 
 	//Jeep
-	meshId = resource.loadMesh("MESHES\\vehicles\\jeep.obj");
-	graphicObject.setMeshId(meshId);
-	textureId = resource.loadTexture("TEXTURES\\vehicles\\jeep_green.png");
+	meshId = resourceManger.loadMesh("MESHES\\vehicles\\jeep.obj");
+	textureId = resourceManger.loadTexture("TEXTURES\\vehicles\\jeep_green.png");
+	materialId = resourceManger.loadMaterial("MATERIALS\\shiny_material.json");
 	vec4 color4 = vec4(0.2, 0.2, 0.2, 1);
 	vec3 pos4 = vec3(3.5, -1.6, 6.5);
+
+	graphicObject.setMeshId(meshId);
+	graphicObject.setTextureId(textureId);
+	graphicObject.setMaterialId(materialId);
 	graphicObject.setColor(color4);
 	graphicObject.setTextureId(textureId);
 	graphicObject.setPosition(pos4);

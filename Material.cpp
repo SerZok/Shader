@@ -1,17 +1,20 @@
 #include "Material.h"
 
 Material::Material() {
-
+	ambient = vec4(0.2, 0.2, 0.2, 1);
+	diffuse = vec4(0.2, 0.2, 0.2, 1);
+	specular = vec4(0.2, 0.2, 0.2, 1);
+	shininess= 32;
 }
 
 bool Material::loadFromJson(string filename) {
 	fstream File(filename);
 	if (!File) {
-		cout << "Material file " << filename << " Error!!!\n";
+		cout << "Material file " << filename << "not found\n";
 		return false;
 	}
 	else {
-		cout << "Material file " << filename << " open\n";
+		cout << "Material file " << filename << " opened\n";
 	}
 	string line;
 	getline(File, line, static_cast<char>(0));

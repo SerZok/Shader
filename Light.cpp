@@ -5,9 +5,9 @@ Light::Light() {
 	this->direction.y = 20;
 	this->direction.z = 20;
 	this->direction.w = 1;
-	this->ambient = vec4(0.71, 0.71, 0.71, 1);
-	this->diffuse = vec4(0.71, 0.71, 0.71, 1);
-	this->specular = vec4(0.0, 0.0, 0.0, 1);
+	this->ambient = vec4(0.9, 0.9, 0.9, 1);
+	this->diffuse = vec4(0.9, 0.9, 0.9, 1);
+	this->specular = vec4(1.0, 1.0, 1.0, 1);
 }
 void Light::setDirection(vec3& direction) {
 	this->direction.x = direction.x;
@@ -25,14 +25,14 @@ void Light::setSpecular(vec4& specular) {
 	this->specular = specular;
 }
 vec4& Light::getDirection() {
-	return this->direction;
+	return direction;
 }
 vec4& Light::getAmbient() {
-	return this->ambient;
+	return ambient;
 }
 vec4& Light::getDiffuse() {
-	return this->diffuse;
+	return diffuse;
 }
 vec4& Light::getSpecular() {
-	return this->specular;
+	return specular;
 }

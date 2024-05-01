@@ -8,7 +8,7 @@ void printFPS() {
 		FPS = mCurrentTick / (final_time - init_time);
 		init_time = time(NULL);
 		char windowTitle[50];
-		sprintf_s(windowTitle, 50, "LAB_5 | FPS : %i |", mCurrentTick);
+		sprintf_s(windowTitle, 50, "LAB_6 | FPS : %i |", mCurrentTick);
 		glutSetWindowTitle(windowTitle);
 		mCurrentTick = 0;
 	}
